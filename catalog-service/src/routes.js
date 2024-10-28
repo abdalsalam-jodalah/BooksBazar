@@ -7,6 +7,6 @@ const { update } = require('./controllers/updateController');
 
 router.get('/search/:topic', search);
 router.get('/info/:item_number', info);
-router.post('/update/:item_number', update);
+router.post('/update', update);
 
 module.exports= router;

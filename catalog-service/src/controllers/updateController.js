@@ -1,8 +1,10 @@
 const db = require('../../db/db'); // Import the SQLite connection
 const update = async (req, res) => {
     try {
-        const id = parseInt(req.params.item_number);
-        const { quantity, price } = req.body;
+        const id = parseInt(req.body.item_number);
+        const  price  = req.body.price;
+        const quantity =req.body.quantity;
+console.log(quantity)
         db.get('SELECT * FROM books WHERE id = ?', [id], (err, book) => {
             if (err) {
                 res.status(500).json({ error: 'error query the database' });

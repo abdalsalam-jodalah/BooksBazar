@@ -2,7 +2,6 @@ const db = require('../../db/db');
 const info = async(req, res) => {
     try {
         const id = parseInt(req.params.item_number);
-        console.log(req.params.item_number)
         db.get('SELECT * FROM books WHERE id = ?', [id], (err, book) => {
             if (err) {
                 res.status(500).json({ error: 'error in query the database' });

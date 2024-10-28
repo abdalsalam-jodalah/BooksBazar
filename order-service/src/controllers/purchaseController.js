@@ -1,13 +1,16 @@
 const axios = require('axios');
 const purchase =async (req, res)=>{
-    const itemId = parseInt(req.params.item_number);
+    const item_number = parseInt(req.body.item_number, 10);
     try {
-        const catalogResponse = await axios.get(`${process.env.CATALOG_SERVICE_URL}/info/${itemId}`);
+        const catalogResponse = await axios.get(`http://localhost:8081/info/${item_number}`);
         const book = catalogResponse.data;
         if (book.quantity > 0) {
-            await axios.post(`${process.env.CATALOG_SERVICE_URL}/update/${itemId}`, {
-                quantity: book.quantity - 1
-            });
+            const quantity= book.quantity-1;
+            await axios.post(`http://localhost:8081/update`,
+                {item_number, quantity}
+
+            );
+
             res.json({ message: `Successfully purchased book: ${book.title}` });
         } else {
             res.status(400).json({ error: 'Book out of stock' });

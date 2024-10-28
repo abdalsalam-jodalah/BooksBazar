@@ -7,6 +7,6 @@ const { search } = require('./controllers/searchController');
 
 router.get('/search/:topic',search);
 router.get('/info/:item_number',info)
-router.post('/purchase/:item_number', purchase);
+router.post('/purchase', purchase);
 
 module.exports = router;
