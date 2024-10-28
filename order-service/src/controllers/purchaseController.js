@@ -2,11 +2,11 @@ const axios = require('axios');
 const purchase =async (req, res)=>{
     const item_number = parseInt(req.body.item_number, 10);
     try {
-        const catalogResponse = await axios.get(`http://localhost:8081/info/${item_number}`);
+        const catalogResponse = await axios.get(`${process.env.CATALOG_SERVICE_URL}/info/${item_number}`);
         const book = catalogResponse.data;
         if (book.quantity > 0) {
             const quantity= book.quantity-1;
-            await axios.post(`http://localhost:8081/update`,
+            await axios.post(`${process.env.CATALOG_SERVICE_URL}/update`,
                 {item_number, quantity}
 
             );

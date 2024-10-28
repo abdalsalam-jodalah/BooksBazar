@@ -2,7 +2,7 @@ const axios = require('axios');
 const search = async (req, res) => {
     try {
         const topic = req.params.topic;
-        const catalogUrl = `http://localhost:8081/search/${topic}`;
+        const catalogUrl = `${process.env.CATALOG_SERVICE_URL}/search/${topic}`;
         const response = await axios.get(catalogUrl);
         res.json(response.data);
     } catch (err) {
