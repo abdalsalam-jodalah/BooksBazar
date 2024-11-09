@@ -13,7 +13,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use('/', routes);
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
     console.log(`catalog service running on port ${PORT}`);
 });
