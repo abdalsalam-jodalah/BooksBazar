@@ -6,18 +6,41 @@ services:
       dockerfile: Dockerfile
     env_file: ./frontend-service/.env
     ports:
-      - "8080:8080"
-  catalog:
+      - "5000:5000"
+    depends_on:
+      - catalog1
+      - catalog2
+      - order1
+      - order2
+
+  catalog1:
     build:
       context: ./catalog-service
       dockerfile: Dockerfile
     env_file: ./catalog-service/.env
     ports:
-      - "8081:8081"
-  order:
+      - "5001:5001"
+
+  catalog2:
+    build:
+      context: ./catalog-service
+      dockerfile: Dockerfile
+    env_file: ./catalog-service/.env
+    ports:
+      - "5003:5003"
+
+  order1:
     build:
       context: ./order-service
       dockerfile: Dockerfile
     env_file: ./order-service/.env
     ports:
-      - "8082:8082"
+      - "5002:5002"
+
+  order2:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    env_file: ./order-service/.env
+    ports:
+      - "5004:5004"

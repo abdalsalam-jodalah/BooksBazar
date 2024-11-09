@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use('/', routes);
 
-const PORT = process.env.PORT || 8082;
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
     console.log(`order service running on port ${PORT}`);
 });
