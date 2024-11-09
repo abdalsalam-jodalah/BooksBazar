@@ -1,12 +1,22 @@
 const axios = require('axios');
+const { invalidateCache } = require('../cacheHelper');
+
 const purchase = async (req, res) => {
     try {
         const { item_number } = req.body;
-        console.log(item_number)
+        console.log(`Purchasing item: ${item_number}`);
+
+        // Invalidate the cache for the item after purchase
+        invalidateCache(item_number);
+
+        // Call the order service to handle the purchase
         const response = await axios.post(`${process.env.ORDER_SERVICE_URL}/purchase`, { item_number });
-        res.json(response.data);
+
+        // Return the response from the order service
+        return res.json(response.data);
     } catch (err) {
-        res.status(500).json({ error:  `'${err}error in purchasing on books in req to order service'` });
+        res.status(500).json({ error: `'${err} : error in purchasing books in req to order service'` });
     }
 };
-module.exports = {purchase};
+
+module.exports = { purchase };
